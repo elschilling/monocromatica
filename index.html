@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link href = "https://fonts.googleapis.com/icon?family=Material+Icons" rel = "stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>monocromatica App</title>
+  </head>
+  <body>
+    <div class="monocromaticaHue">monocromatica<span></span></div>
+      <div id="navMenu">
+        <div class="menuToogle" onclick="show()"><i class = "material-icons icon">palette</i></div>
+        <div class="hue">
+          <input class="slider" name="hue" type="range" min="1" max="360" value="1">
+        </div>
+        <!-- <div class="circle"></div> -->
+    </div>
+    <script type="module" src="/main.js"></script>
+    <script>
+      console.log('MONOCROMÁTICA')
+      console.log('concept by @luschtattoo')
+      console.log('3d webapp by @e.l.schilling')
+      function show() {
+        document.getElementById('navMenu').classList.toggle('active')
+    }    
+    </script>
+  </body>
+
+</html>
