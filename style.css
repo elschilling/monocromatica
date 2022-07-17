@@ -94,3 +94,10 @@ body {
   cursor: pointer;
   opacity: 0.4;
 }
+
+@media (max-width: 430px)
+{
+  .monocromaticaHue {
+    font-size: 1.5rem;
+   }
+}
