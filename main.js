@@ -156,6 +156,7 @@ function updateColor() {
  
 const main = () => {
 const hueInput = document.querySelector('input[name=hue]')
+hueInput.value = color.hue
 hueInput.addEventListener('input', () => {
     color.hue = hueInput.value
     updateColor()
