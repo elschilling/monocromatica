@@ -1,13 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu+Mono:wght@700&display=swap');
 
 body {
+  font-family: 'Ubuntu Mono', monospace;
   margin: 0px;
   overflow: hidden;
-  touch-action: none;
+  /* touch-action: none; */
 }
 
 .monocromaticaHue {
-  font-family: 'Ubuntu Mono', monospace;
   font-size: 3rem;
   position: absolute;
   top: 50px;
@@ -23,26 +23,26 @@ body {
   bottom: -250px;
   left: 50%;
   position: absolute;
-  width: 300px;
-  height: 300px;
+  width: 200px;
+  height: 200px;
   background: #bbb;
-  transform: translateX(-50%);
+  transform: translateX(-90%);
   transition: .4s;
   z-index: 10;
 }
 
 #navMenu.active {
-  bottom: -20px;
+  bottom: 50px;
 }
 
 .menuToogle {
   cursor: pointer;
-  margin: -10px;
+  margin: 0px;
   padding: 20px;
   transform: translateX(-50%);
   left: 50%;
   position: absolute;
-  bottom: 300px;
+  bottom: 250px;
   background: white;
   border-radius: 50%;
 }
@@ -68,19 +68,25 @@ body {
   background: red;
   z-index: 2;
 }
-
+.slider-container {
+  transform: rotateZ(90deg) translateY(-200px)
+}
 .slider {
+  margin: 15px;
+  /* transform: rotateZ(90deg) translateY(100px); */
+  z-index: 10;
   -webkit-appearance: none;
   width: 100%;
   height: 35px;
   border-radius: 35px;  
-  background: linear-gradient(90deg,
+  /* background: linear-gradient(90deg,
               rgba(255, 0, 0, 1) 0%,
               rgba(255, 255, 0, 1) 33%,
               rgba(0, 192, 255, 1) 66%,
-              rgba(192, 0, 255, 1) 100%);
+              rgba(192, 0, 255, 1) 100%); */
+  background: #ccc;
   outline: none;
-  opacity: 0.7;
+  opacity: 0.4;
   -webkit-transition: .2s;
   transition: opacity .2s;
 }
@@ -91,9 +97,13 @@ body {
   width: 50px;
   height: 50px;
   border-radius: 50%; 
-  background: black;
+  background: white;
   cursor: pointer;
-  opacity: 0.4;
+  opacity: 0.5;
+  box-shadow: 0 0 10px #000;
+}
+.slider::-webkit-slider-thumb:hover {
+  opacity: 0.9;
 }
 
 .circle-slider {
@@ -124,6 +134,12 @@ body {
 
 .dragging {
   opacity: 0.1;
+}
+
+.color {
+  position: absolute;
+  bottom: -24px;
+  right: -105px;
 }
 
 @media (max-width: 430px)

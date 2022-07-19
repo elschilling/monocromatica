@@ -151,18 +151,30 @@ function updateColor() {
   scene.background.setStyle(hslColor)
   // console.log(color.hue)
   document.querySelector('.monocromaticaHue').children[0].innerHTML = '#' + color.hue
+  document.querySelector('.color').innerHTML = 'hsl(' + color.hue + ', ' + color.sat + '%, ' + color.light + '%)'
 }
 
 
  
-// const main = () => {
-// const hueInput = document.querySelector('input[name=hue]')
-// // hueInput.value = color.hue
-// hueInput.addEventListener('input', () => {
-//     color.hue = hueInput.value
-//     updateColor()
-//     })
-// }
+const satInput = document.querySelector('input[name=sat]')
+satInput.value = color.sat
+
+satInput.addEventListener('input', (e) => {
+  console.log(e.target.value)
+    color.sat = satInput.value
+    drawPicker()
+    updateColor()
+})
+
+const lightInput = document.querySelector('input[name=light]')
+lightInput.value = color.light
+
+lightInput.addEventListener('input', (e) => {
+  console.log('light: ', e.target.value)
+    color.light = lightInput.value
+    drawPicker()
+    updateColor()
+})
 
 const getHSL = () => {
   return `hsla(${color.hue}, ${color.sat}%, ${color.light}%, ${color.alpha})`
@@ -182,20 +194,24 @@ function hslToHex(h, s, l) {
 // document.addEventListener('DOMContentLoaded', main)
 
 let spanHue, hueSpan
-for (let h = 0; h < 360; h++) {
-  hueSpan = document.createElement("span")
-  document.querySelector('.hue').appendChild(hueSpan)
-  spanHue = document.querySelector('.hue').children[h]
-  spanHue.style.width = '3px'
-  spanHue.style.height = '120px'
-  spanHue.style.display = 'block'
-  spanHue.style.position = 'absolute'
-  spanHue.style.left = '50%'
-  spanHue.style.top = '50%'
-  spanHue.style.transformOrigin = 'center top'
-  spanHue.style.transform = 'rotateZ(' + h + 'deg)'
-  spanHue.style.background = 'hsl(' + h + ', 32%, 50%)'
+function drawPicker() {
+  document.querySelector('.hue').innerHTML = ''
+  for (let h = 0; h < 360; h++) {
+    hueSpan = document.createElement("span")
+    document.querySelector('.hue').appendChild(hueSpan)
+    spanHue = document.querySelector('.hue').children[h]
+    spanHue.style.width = '3px'
+    spanHue.style.height = '80px'
+    spanHue.style.display = 'block'
+    spanHue.style.position = 'absolute'
+    spanHue.style.left = '50%'
+    spanHue.style.top = '50%'
+    spanHue.style.transformOrigin = 'center top'
+    spanHue.style.transform = 'rotateZ(' + h + 'deg)'
+    spanHue.style.background = 'hsl(' + h + ', ' + color.sat + '%, ' + color.light + '%)'
+  }
 }
+drawPicker(color.sat)
 
 let is_dragging = false
 let centro_x, centro_y, delta_x, delta_y, angle

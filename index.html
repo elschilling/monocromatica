@@ -10,11 +10,14 @@
     <div class="monocromaticaHue">monocromatica<span></span></div>
       <div id="navMenu">
         <div class="menuToogle" onclick="show()"><i class = "material-icons icon">palette</i></div>
-        <div class="hue">
-          <!-- <input class="slider" name="hue" type="range" min="1" max="360" value="1"> -->
+        <div class="slider-container">
+          <input class="slider" name="light" type="range" min="1" max="100" value="1">
+          <input class="slider" name="sat" type="range" min="1" max="100" value="1">
         </div>
+        <div class="hue"></div>
         <div class="circle"></div>
         <div class="circle-slider"></div>
+        <p class="color">hsl(20,30%,40%)</p>
     </div>
     <script type="module" src="/main.js"></script>
     <script>
