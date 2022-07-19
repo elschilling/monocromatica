@@ -3,6 +3,7 @@
 body {
   margin: 0px;
   overflow: hidden;
+  touch-action: none;
 }
 
 .monocromaticaHue {
@@ -31,7 +32,7 @@ body {
 }
 
 #navMenu.active {
-  bottom: -100px;
+  bottom: -20px;
 }
 
 .menuToogle {
@@ -93,6 +94,36 @@ body {
   background: black;
   cursor: pointer;
   opacity: 0.4;
+}
+
+.circle-slider {
+  position: absolute;
+  width: 20px;
+  height: 90px;
+  z-index: 3;
+  top: 50%;
+  transform-origin: top center;
+}
+.circle-slider::before {
+  content: "";
+  background: white; 
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  transform-origin: top center;
+  left: -40px;
+  bottom: -40px;
+  border-radius: 50%;
+  z-index: 5;
+  opacity: 0.5;
+  box-shadow: 0 0 10px #000;
+}
+.circle-slider:hover {
+  opacity: 0.8;
+}
+
+.dragging {
+  opacity: 0.1;
 }
 
 @media (max-width: 430px)

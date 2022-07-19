@@ -144,6 +144,7 @@ function animate() {
 function updateColor() {
   hslColor = getHSL()
   document.getElementById('navMenu').style.background = hslColor
+  document.querySelector('.circle').style.background = hslColor
   corBloom.setStyle(hslColor)
   corPointLight.setStyle(hslColor)
   corPointLight2.setStyle(hslColor)
@@ -154,14 +155,14 @@ function updateColor() {
 
 
  
-const main = () => {
-const hueInput = document.querySelector('input[name=hue]')
-hueInput.value = color.hue
-hueInput.addEventListener('input', () => {
-    color.hue = hueInput.value
-    updateColor()
-    })
-}
+// const main = () => {
+// const hueInput = document.querySelector('input[name=hue]')
+// // hueInput.value = color.hue
+// hueInput.addEventListener('input', () => {
+//     color.hue = hueInput.value
+//     updateColor()
+//     })
+// }
 
 const getHSL = () => {
   return `hsla(${color.hue}, ${color.sat}%, ${color.light}%, ${color.alpha})`
@@ -178,25 +179,73 @@ function hslToHex(h, s, l) {
   return `#${f(0)}${f(8)}${f(4)}`;
 }
 
-document.addEventListener('DOMContentLoaded', main)
+// document.addEventListener('DOMContentLoaded', main)
 
-// console.log(document.querySelector('.hue'))
+let spanHue, hueSpan
+for (let h = 0; h < 360; h++) {
+  hueSpan = document.createElement("span")
+  document.querySelector('.hue').appendChild(hueSpan)
+  spanHue = document.querySelector('.hue').children[h]
+  spanHue.style.width = '3px'
+  spanHue.style.height = '120px'
+  spanHue.style.display = 'block'
+  spanHue.style.position = 'absolute'
+  spanHue.style.left = '50%'
+  spanHue.style.top = '50%'
+  spanHue.style.transformOrigin = 'center top'
+  spanHue.style.transform = 'rotateZ(' + h + 'deg)'
+  spanHue.style.background = 'hsl(' + h + ', 32%, 50%)'
+}
 
-// let spanHue, hueSpan
-// for (let h = 0; h < 360; h++) {
-//   hueSpan = document.createElement("span")
-//   document.querySelector('.hue').appendChild(hueSpan)
-//   spanHue = document.querySelector('.hue').children[h]
-//   spanHue.style.width = '3px'
-//   spanHue.style.height = '120px'
-//   spanHue.style.display = 'block'
-//   spanHue.style.position = 'absolute'
-//   spanHue.style.left = '50%'
-//   spanHue.style.top = '50%'
-//   spanHue.style.transformOrigin = 'center top'
-//   spanHue.style.transform = 'rotateZ(' + h + 'deg)'
-//   spanHue.style.background = 'hsl(' + h + ', 100%, 50%)'
-  
-// }
+let is_dragging = false
+let centro_x, centro_y, delta_x, delta_y, angle
 
-// console.log(spanHue)
+document.querySelector('.circle-slider').style.transform = 'rotate(' + color.hue + 'deg)'
+
+document.addEventListener('mousedown', (e) => {
+  is_dragging = true
+})
+document.addEventListener('mouseup', (e) => {
+  is_dragging = false
+})
+document.addEventListener('touchstart', (e) => {
+  is_dragging = true
+})
+document.addEventListener('touchend', (e) => {
+  is_dragging = false
+})
+document.addEventListener('touchmove', (e) => {
+  if (e.target.getAttribute('class') === 'circle-slider') {
+    let centro = document.getElementById('navMenu').getBoundingClientRect()
+    centro_x = centro.x + (centro.width / 2)
+    centro_y = centro.y + (centro.height / 2)
+    delta_x = centro_x - e.touches[0].clientX
+    delta_y = centro_y - e.touches[0].clientY
+    angle = Math.atan2(delta_y, delta_x) * (180 / Math.PI) + 90
+    angle = Math.round(angle)
+    e.target.style.transform = 'rotate(' + angle + 'deg)'
+    if (angle < 0) {
+      angle = 360 + angle
+    }
+    color.hue = angle
+    updateColor()
+  }
+})
+
+document.addEventListener('mousemove', (e) => {
+  if (is_dragging && e.target.getAttribute('class') === 'circle-slider') {
+    let centro = document.getElementById('navMenu').getBoundingClientRect()
+    centro_x = centro.x + (centro.width / 2)
+    centro_y = centro.y + (centro.height / 2)
+    delta_x = centro_x - e.clientX
+    delta_y = centro_y - e.clientY
+    angle = Math.atan2(delta_y, delta_x) * (180 / Math.PI) + 90
+    angle = Math.round(angle)
+    e.target.style.transform = 'rotate(' + angle + 'deg)'
+    if (angle < 0) {
+      angle = 360 + angle
+    }
+    color.hue = angle
+    updateColor()
+  }
+})
